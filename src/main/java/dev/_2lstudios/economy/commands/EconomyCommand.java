@@ -44,12 +44,12 @@ public class EconomyCommand implements CommandExecutor {
                             final Player player = server.getPlayer(targetPlayer);
                             final double amount = toDouble(amountString);
 
-                            accountProvider.add(player.getUniqueId(), amount);
+                            accountProvider.addBalance(player.getUniqueId(), amount);
                         } else if (subcmd.equals("set")) {
                             final Player player = server.getPlayer(targetPlayer);
                             final double amount = toDouble(amountString);
 
-                            accountProvider.set(player.getUniqueId(), amount);
+                            accountProvider.setBalance(player.getUniqueId(), amount);
                         }
                     } else {
                         sender.sendMessage("no amount");

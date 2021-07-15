@@ -15,19 +15,24 @@ public class YamlAccountProvider extends AccountProvider {
     }
 
     @Override
-    public void remove(UUID uuid) {
-        return;
+    public boolean exists(final UUID uuid) {
+        return configurationUtil.exists("%datafolder%/data/" + uuid.toString());
     }
 
     @Override
-    public double get(final UUID uuid) {
+    public void remove(UUID uuid) {
+        configurationUtil.deleteConfiguration("%datafolder%/data/" + uuid.toString());
+    }
+
+    @Override
+    public double getBalance(final UUID uuid) {
         final YamlConfiguration config = configurationUtil.getConfiguration("%datafolder%/data/" + uuid.toString());
 
         return config.getDouble("balance");
     }
 
     @Override
-    public double set(final UUID uuid, double amount) {
+    public double setBalance(final UUID uuid, double amount) {
         final YamlConfiguration config = configurationUtil.getConfiguration("%datafolder%/data/" + uuid.toString());
 
         config.set("balance", amount);

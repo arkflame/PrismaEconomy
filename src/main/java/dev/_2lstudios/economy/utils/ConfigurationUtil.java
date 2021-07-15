@@ -15,6 +15,12 @@ public class ConfigurationUtil {
     this.plugin = plugin;
   }
   
+  public boolean exists(String filePath) {
+    final File file = new File(replaceDataFolder(filePath));
+
+    return file != null && file.exists();
+  }
+
   public YamlConfiguration getConfiguration(String filePath) {
     File file = new File(replaceDataFolder(filePath));
     if (file.exists())
@@ -72,7 +78,7 @@ public class ConfigurationUtil {
     } 
   }
   
-  private void deleteConfiguration(String filePath) {
+  public void deleteConfiguration(String filePath) {
     File file = new File(replaceDataFolder(filePath));
     if (file.exists())
       file.delete(); 

@@ -37,7 +37,7 @@ public class BalanceCommand implements CommandExecutor {
 
             if (player != null) {
                 final UUID uuid = player.getUniqueId();
-                final double balance = accountProvider.get(uuid);
+                final double balance = accountProvider.getBalance(uuid);
 
                 sender.sendMessage("Balance: " + balance);
             }

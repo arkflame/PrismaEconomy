@@ -32,14 +32,27 @@ public class MongoAccountProvider extends AccountProvider {
         return new Document().append("uuid", uuid.toString()).append("balance", amount);
     }
 
-    @Override
-    public void remove(UUID uuid) {
-        return;
+    private Document toFilter(final UUID uuid) {
+        return new Document("uuid", uuid.toString());
+    }
+
+    private Document getDocument(final UUID uuid) {
+        return collection.find(toFilter(uuid)).first();
     }
 
     @Override
-    public double get(final UUID uuid) {
-        Document result = collection.find(new Document("uuid", uuid.toString())).first();
+    public boolean exists(UUID uuid) {
+        return getDocument(uuid) != null;
+    }
+
+    @Override
+    public void remove(UUID uuid) {
+        collection.deleteOne(toFilter(uuid));
+    }
+
+    @Override
+    public double getBalance(final UUID uuid) {
+        Document result = collection.find(toFilter(uuid)).first();
 
         if (result != null && result.containsKey("balance")) {
             return result.getDouble("balance");
@@ -49,10 +62,12 @@ public class MongoAccountProvider extends AccountProvider {
     }
 
     @Override
-    public double set(final UUID uuid, double amount) {
+    public double setBalance(final UUID uuid, double amount) {
         final Document document = toMongoDocument(uuid, amount);
 
-        collection.insertOne(document);
+        if (collection.findOneAndUpdate(toFilter(uuid), document) == null) {
+            collection.insertOne(document);
+        }
 
         return amount;
     }
