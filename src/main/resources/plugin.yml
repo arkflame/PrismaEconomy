@@ -4,6 +4,7 @@ author: ${author}
 main: ${mainClass}
 version: ${version}
 url: ${url}
+depends: [Vault]
 commands:
   balance:
     aliases: ["bal", "money"]
