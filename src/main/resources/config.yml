@@ -1,0 +1,25 @@
+# Show extra information.
+debug: true
+
+# Default language used by the plugin.
+# This will change according to player's language.
+lang: en
+
+# How the plugin will load/store data.
+provider:
+  # Connection driver that will be used to connect to the database. 
+  # Possible values: H2, MongoDB, MSSQL, MySQL, PostgreSQL, SQLite.
+  driver: "MongoDB"
+  # Cluster or database server to connect
+  host: "127.0.0.1"
+  port: 27017
+  # Cluster or Database server credentials 
+  # (Can left empty for Mongo unauthenticated connection)
+  username: ""
+  password: ""
+  # Database which will be used
+  database: "bukkit"
+  # NoSQL Collection where the data will be saved (Only for MongoDB)
+  collection: "economy"
+  # SQL table prefix (Only for MySQL and SQLite)
+  prefix: "auth_"

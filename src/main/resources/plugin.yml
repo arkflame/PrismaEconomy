@@ -1,0 +1,13 @@
+name: ${name}
+description: ${description}
+author: ${author}
+main: ${mainClass}
+version: ${version}
+url: ${url}
+commands:
+  balance:
+    aliases: ["bal", "money"]
+    description: Check your economy balance
+  economy:
+    aliases: ["eco"]
+    description: Use economy commands
