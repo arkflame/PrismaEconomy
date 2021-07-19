@@ -18,18 +18,12 @@ public class MongoAccountProvider extends AccountProvider {
 
     public MongoAccountProvider(final String uri, final String database, final String collection) {
         final MongoClientSettings settings = MongoClientSettings.builder()
-            .applyConnectionString(new ConnectionString(uri))
-            .retryWrites(true)
-            .build();
+                .applyConnectionString(new ConnectionString(uri)).retryWrites(true).build();
         final MongoClient client = MongoClients.create(settings);
         final MongoDatabase mongoDatabase = client.getDatabase(database);
 
         this.collection = mongoDatabase.getCollection(collection);
         this.collection.countDocuments();
-    }
-
-    private Document toMongoDocument(final UUID uuid, final double amount) {
-        return new Document().append("uuid", uuid.toString()).append("balance", amount);
     }
 
     private Document toFilter(final UUID uuid) {
@@ -63,13 +57,12 @@ public class MongoAccountProvider extends AccountProvider {
 
     @Override
     public double setBalance(final UUID uuid, double amount) {
-        final Document document = toMongoDocument(uuid, amount);
         final Document result = this.collection.find(new Document("uuid", uuid.toString())).first();
 
         if (result == null) {
-            this.collection.insertOne(document);
+            this.collection.insertOne(new Document().append("uuid", uuid.toString()).append("balance", amount));
         } else {
-            this.collection.updateOne(result, document);
+            this.collection.updateOne(result, new Document("$set", new Document("balance", amount)));
         }
 
         return amount;
