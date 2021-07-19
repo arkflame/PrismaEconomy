@@ -64,7 +64,7 @@ public class MongoAccountProvider extends AccountProvider {
     @Override
     public double setBalance(final UUID uuid, double amount) {
         final Document document = toMongoDocument(uuid, amount);
-        final Document result = this.collection.find(new Document("uuid", uuid)).first();
+        final Document result = this.collection.find(new Document("uuid", uuid.toString())).first();
 
         if (result == null) {
             this.collection.insertOne(document);
