@@ -16,12 +16,12 @@ public class AccountProvider {
         // Overriden by superclass
     };
 
-    public double setBalance(final UUID uuid, double amount) {
+    public double setBalance(final UUID uuid, final double amount) {
         // Overriden by superclass
         return 0;
     };
 
-    public double addBalance(final UUID uuid, double amount) {
+    public double addBalance(final UUID uuid, final double amount) {
         final double newAmount = getBalance(uuid) + amount;
 
         setBalance(uuid, newAmount);
