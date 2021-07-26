@@ -10,11 +10,11 @@ import org.bukkit.plugin.Plugin;
 
 public class ConfigurationUtil {
   private final Plugin plugin;
-  
+
   public ConfigurationUtil(Plugin plugin) {
     this.plugin = plugin;
   }
-  
+
   public boolean exists(String filePath) {
     final File file = new File(replaceDataFolder(filePath));
 
@@ -24,10 +24,10 @@ public class ConfigurationUtil {
   public YamlConfiguration getConfiguration(String filePath) {
     File file = new File(replaceDataFolder(filePath));
     if (file.exists())
-      return YamlConfiguration.loadConfiguration(file); 
+      return YamlConfiguration.loadConfiguration(file);
     return new YamlConfiguration();
   }
-  
+
   public void createConfiguration(String file) {
     Logger logger = this.plugin.getLogger();
     File configFile = new File(replaceDataFolder(file));
@@ -37,53 +37,54 @@ public class ConfigurationUtil {
         InputStream inputStream = this.plugin.getClass().getClassLoader().getResourceAsStream(configFileName);
         File parentFile = configFile.getParentFile();
         if (parentFile != null)
-          parentFile.mkdirs(); 
+          parentFile.mkdirs();
         if (inputStream != null) {
           Files.copy(inputStream, configFile.toPath(), new java.nio.file.CopyOption[0]);
           logger.info("File '" + configFile + "' had been created!");
         } else {
           configFile.createNewFile();
-        } 
+        }
         inputStream.close();
       } catch (Exception e) {
         logger.info("An exception was caught while creating '" + configFileName + "'!");
-      } 
+      }
     } else {
       logger.info("Skipped '" + configFileName + "' creation because it already exists!");
-    } 
+    }
   }
-  
+
   public void saveConfiguration(YamlConfiguration yamlConfiguration, String file, boolean async) {
     if (async) {
-      this.plugin.getServer().getScheduler().runTaskAsynchronously(this.plugin, () -> saveConfiguration(yamlConfiguration, replaceDataFolder(file)));
+      this.plugin.getServer().getScheduler().runTaskAsynchronously(this.plugin,
+          () -> saveConfiguration(yamlConfiguration, replaceDataFolder(file)));
     } else {
       saveConfiguration(yamlConfiguration, replaceDataFolder(file));
-    } 
+    }
   }
-  
+
   private void saveConfiguration(YamlConfiguration yamlConfiguration, String file) {
     try {
       yamlConfiguration.save(replaceDataFolder(file));
     } catch (IOException e) {
-      this.plugin.getLogger().info("[%pluginname%] Unable to save configuration file!".replace("%pluginname%", this.plugin
-            .getDescription().getName()));
-    } 
+      this.plugin.getLogger().info("[%pluginname%] Unable to save configuration file!".replace("%pluginname%",
+          this.plugin.getDescription().getName()));
+    }
   }
-  
+
   public void deleteConfiguration(String filePath, boolean async) {
     if (async) {
       this.plugin.getServer().getScheduler().runTaskAsynchronously(this.plugin, () -> deleteConfiguration(filePath));
     } else {
       deleteConfiguration(filePath);
-    } 
+    }
   }
-  
+
   public void deleteConfiguration(String filePath) {
     File file = new File(replaceDataFolder(filePath));
     if (file.exists())
-      file.delete(); 
+      file.delete();
   }
-  
+
   private String replaceDataFolder(String filePath) {
     return filePath.replace("%datafolder%", this.plugin.getDataFolder().toPath().toString());
   }
