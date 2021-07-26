@@ -6,6 +6,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.UpdateOptions;
 
 import org.bson.Document;
 
@@ -34,9 +35,9 @@ public class MongoEconomyProvider implements EconomyProvider {
     public double getBalance(UUID uuid) {
         final String uuidString = uuid.toString();
         final Document document = economyBalance.find(new Document("uuid", uuidString)).first();
-        
+
         if (document != null) {
-            return document.getInteger("balance");
+            return document.getDouble("balance");
         }
 
         return 0;
@@ -53,21 +54,41 @@ public class MongoEconomyProvider implements EconomyProvider {
     @Override
     public double setBalance(UUID uuid, double amount) {
         final String uuidString = uuid.toString();
-        
-        return 0;
+
+        economyBalance.updateOne(new Document("uuid", uuidString),
+                new Document("$set", new Document("balance", amount)), new UpdateOptions().upsert(true));
+
+        return amount;
     }
 
     @Override
     public double addBalance(UUID uuid, double amount) {
-        final String uuidString = uuid.toString();
-        
+        final Document uuidFilter = new Document("uuid", uuid.toString());
+        final Document document = economyBalance.find(uuidFilter).first();
+
+        if (document != null) {
+            final double newAmount = document.getDouble("balance") + amount;
+
+            economyBalance.updateOne(uuidFilter, new Document("$set", new Document("balance", newAmount)),
+                    new UpdateOptions().upsert(true));
+
+            return newAmount;
+        }
+
         return 0;
     }
 
     @Override
     public boolean hasBalance(UUID uuid, double amount) {
         final String uuidString = uuid.toString();
-        
+        final Document document = economyBalance.find(new Document("uuid", uuidString)).first();
+
+        if (document != null) {
+            final double userAmount = document.getDouble("balance");
+
+            return userAmount >= amount;
+        }
+
         return false;
     }
 }
