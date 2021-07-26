@@ -16,9 +16,9 @@ public class BalanceCommand implements CommandExecutor {
     private final Server server;
     private final EconomyProvider accountProvider;
 
-    public BalanceCommand(Plugin plugin, Server server, EconomyProvider accountProvider) {
+    public BalanceCommand(Plugin plugin, EconomyProvider accountProvider) {
         this.plugin = plugin;
-        this.server = server;
+        this.server = plugin.getServer();
         this.accountProvider = accountProvider;
     }
 
