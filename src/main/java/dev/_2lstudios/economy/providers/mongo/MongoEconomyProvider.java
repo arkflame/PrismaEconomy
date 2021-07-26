@@ -43,9 +43,9 @@ public class MongoEconomyProvider implements EconomyProvider {
     }
 
     @Override
-    public boolean remove(UUID uuid) {
+    public boolean delete(UUID uuid) {
         final String uuidString = uuid.toString();
-        final int deletedCount = economyBalance.deleteMany(new Document("uuid", uuidString)).getDeletedCount();
+        final long deletedCount = economyBalance.deleteMany(new Document("uuid", uuidString)).getDeletedCount();
 
         return deletedCount > 0;
     }

@@ -7,7 +7,7 @@ public interface EconomyProvider {
 
     public double getBalance(final UUID uuid);
 
-    public boolean remove(final UUID uuid);
+    public boolean delete(final UUID uuid);
 
     public double setBalance(final UUID uuid, final double amount);
 
