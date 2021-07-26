@@ -1,0 +1,17 @@
+package dev._2lstudios.economy.providers;
+
+import java.util.UUID;
+
+public interface AccountProvider {
+    public boolean exists(final UUID uuid);
+
+    public double getBalance(final UUID uuid);
+
+    public void remove(final UUID uuid);
+
+    public double setBalance(final UUID uuid, final double amount);
+
+    public double addBalance(final UUID uuid, final double amount);
+
+    public boolean hasBalance(final UUID uuid, final double amount);
+}

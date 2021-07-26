@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import dev._2lstudios.economy.account.AccountProvider;
+import dev._2lstudios.economy.providers.AccountProvider;
 
 public class BalanceCommand implements CommandExecutor {
     private final Plugin plugin;
