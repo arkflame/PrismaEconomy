@@ -9,13 +9,13 @@ import com.mongodb.client.MongoDatabase;
 
 import org.bson.Document;
 
-import dev._2lstudios.economy.providers.AccountProvider;
+import dev._2lstudios.economy.providers.EconomyProvider;
 import dev._2lstudios.economy.utils.MongoURIBuilder;
 
-public class MongoAccountProvider implements AccountProvider {
+public class MongoEconomyProvider implements EconomyProvider {
     private final MongoCollection<Document> economyBalance;
 
-    public MongoAccountProvider(final MongoURIBuilder mongoURIBuilder) {
+    public MongoEconomyProvider(final MongoURIBuilder mongoURIBuilder) {
         final MongoClient client = MongoClients.create(mongoURIBuilder.toURI());
         final MongoDatabase mongoDatabase = client.getDatabase(mongoURIBuilder.getDatabase());
 

@@ -2,7 +2,7 @@ package dev._2lstudios.economy.providers;
 
 import java.util.UUID;
 
-public interface AccountProvider {
+public interface EconomyProvider {
     public boolean exists(final UUID uuid);
 
     public double getBalance(final UUID uuid);

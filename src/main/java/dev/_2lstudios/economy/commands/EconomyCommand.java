@@ -7,14 +7,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import dev._2lstudios.economy.providers.AccountProvider;
+import dev._2lstudios.economy.providers.EconomyProvider;
 
 public class EconomyCommand implements CommandExecutor {
     private final Plugin plugin;
     private final Server server;
-    private final AccountProvider accountProvider;
+    private final EconomyProvider accountProvider;
 
-    public EconomyCommand(Plugin plugin, Server server, AccountProvider accountProvider) {
+    public EconomyCommand(Plugin plugin, Server server, EconomyProvider accountProvider) {
         this.plugin = plugin;
         this.server = server;
         this.accountProvider = accountProvider;
