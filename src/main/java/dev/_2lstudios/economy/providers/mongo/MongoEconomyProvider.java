@@ -25,21 +25,29 @@ public class MongoEconomyProvider implements EconomyProvider {
     @Override
     public boolean exists(UUID uuid) {
         final String uuidString = uuid.toString();
+        final Document document = economyBalance.find(new Document("uuid", uuidString)).first();
 
-        return false;
+        return document != null;
     }
 
     @Override
     public double getBalance(UUID uuid) {
         final String uuidString = uuid.toString();
+        final Document document = economyBalance.find(new Document("uuid", uuidString)).first();
         
+        if (document != null) {
+            return document.getInteger("balance");
+        }
+
         return 0;
     }
 
     @Override
-    public void remove(UUID uuid) {
+    public boolean remove(UUID uuid) {
         final String uuidString = uuid.toString();
-        
+        final int deletedCount = economyBalance.deleteMany(new Document("uuid", uuidString)).getDeletedCount();
+
+        return deletedCount > 0;
     }
 
     @Override
