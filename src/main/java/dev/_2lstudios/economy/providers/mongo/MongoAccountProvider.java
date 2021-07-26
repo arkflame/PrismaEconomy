@@ -1,4 +1,4 @@
-package dev._2lstudios.economy.providers.mongodb;
+package dev._2lstudios.economy.providers.mongo;
 
 import java.util.UUID;
 
