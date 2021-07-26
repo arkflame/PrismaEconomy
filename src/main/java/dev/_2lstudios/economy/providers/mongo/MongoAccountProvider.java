@@ -24,37 +24,42 @@ public class MongoAccountProvider implements AccountProvider {
 
     @Override
     public boolean exists(UUID uuid) {
-        // TODO Auto-generated method stub
+        final String uuidString = uuid.toString();
+
         return false;
     }
 
     @Override
     public double getBalance(UUID uuid) {
-        // TODO Auto-generated method stub
+        final String uuidString = uuid.toString();
+        
         return 0;
     }
 
     @Override
     public void remove(UUID uuid) {
-        // TODO Auto-generated method stub
+        final String uuidString = uuid.toString();
         
     }
 
     @Override
     public double setBalance(UUID uuid, double amount) {
-        // TODO Auto-generated method stub
+        final String uuidString = uuid.toString();
+        
         return 0;
     }
 
     @Override
     public double addBalance(UUID uuid, double amount) {
-        // TODO Auto-generated method stub
+        final String uuidString = uuid.toString();
+        
         return 0;
     }
 
     @Override
     public boolean hasBalance(UUID uuid, double amount) {
-        // TODO Auto-generated method stub
+        final String uuidString = uuid.toString();
+        
         return false;
     }
 }
