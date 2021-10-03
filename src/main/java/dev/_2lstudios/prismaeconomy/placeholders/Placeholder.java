@@ -1,12 +1,12 @@
-package dev._2lstudios.economy.placeholders;
+package dev._2lstudios.prismaeconomy.placeholders;
 
 public class Placeholder {
     private final String key;
     private final String value;
 
-    public Placeholder(final String key, final String value) {
+    public Placeholder(final String key, final Object value) {
         this.key = key;
-        this.value = value;
+        this.value = String.valueOf(value);
     }
 
     public String replace(final String string) {

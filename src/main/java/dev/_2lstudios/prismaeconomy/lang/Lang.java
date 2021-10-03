@@ -1,4 +1,4 @@
-package dev._2lstudios.economy.lang;
+package dev._2lstudios.prismaeconomy.lang;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,8 +6,8 @@ import java.util.Map;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
 
-import dev._2lstudios.economy.placeholders.Placeholder;
-import dev._2lstudios.economy.placeholders.Placeholders;
+import dev._2lstudios.prismaeconomy.placeholders.Placeholder;
+import dev._2lstudios.prismaeconomy.placeholders.Placeholders;
 
 public class Lang {
     private final Map<String, String> messages = new HashMap<>();

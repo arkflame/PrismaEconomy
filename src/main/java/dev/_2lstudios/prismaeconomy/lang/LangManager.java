@@ -1,17 +1,18 @@
-package dev._2lstudios.economy.lang;
+package dev._2lstudios.prismaeconomy.lang;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Player;
 
-import dev._2lstudios.economy.placeholders.Placeholder;
-import dev._2lstudios.economy.utils.ConfigUtil;
-import dev._2lstudios.economy.utils.LocaleUtil;
+import dev._2lstudios.prismaeconomy.placeholders.Placeholder;
+import dev._2lstudios.prismaeconomy.utils.ConfigUtil;
+import dev._2lstudios.prismaeconomy.utils.LocaleUtil;
 
 public class LangManager {
     private final Map<String, Lang> languages = new HashMap<>();
@@ -19,6 +20,8 @@ public class LangManager {
 
     public LangManager(final ConfigUtil configUtil, final String defaultLocale) {
         final File folder = new File(configUtil.getDataFolder() + "/lang/");
+
+        LangExtractor.extractAll(folder);
 
         if (folder.isDirectory()) {
             for (final File file : folder.listFiles()) {
@@ -31,43 +34,48 @@ public class LangManager {
         this.defaultLocale = defaultLocale;
     }
 
-    public String getMessage(CommandSender sender, String key, final Placeholder... placeholders) {
-        final String rawLocale;
-
+    private String getLocale(final CommandSender sender) {
         if (sender instanceof Player) {
-            rawLocale = LocaleUtil.getLocale((Player) sender).toLowerCase();
-        } else {
-            rawLocale = null;
+            return LocaleUtil.getLocale((Player) sender).toLowerCase();
         }
 
-        Lang lang = null;
+        return null;
+    }
 
+    private Lang getLang(final String rawLocale) {
         if (rawLocale != null && rawLocale.contains("_")) {
             final String[] locale = rawLocale.split("_");
             final String langCode = locale[0];
             final String region = locale[1];
 
             if (languages.containsKey(langCode + "_" + region)) {
-                lang = languages.get(langCode + "_" + region);
+                return languages.get(langCode + "_" + region);
             } else if (languages.containsKey(langCode)) {
-                lang = languages.get(langCode);
+                return languages.get(langCode);
             } else if (languages.containsKey(defaultLocale)) {
-                lang = languages.get(defaultLocale);
+                return languages.get(defaultLocale);
             }
         } else if (languages.containsKey(defaultLocale)) {
-            lang = languages.get(defaultLocale);
+            return languages.get(defaultLocale);
         }
 
-        if (lang != null) {
-            final String message = lang.getMessage(key, placeholders);
+        return null;
+    }
 
-            return ChatColor.translateAlternateColorCodes('&', message);
+    public String getMessage(CommandSender sender, String key, final Placeholder... placeholders) {
+        final String rawLocale = getLocale(sender);
+        final Lang lang = getLang(rawLocale);
+
+        if (lang != null) {
+            return ChatColor.translateAlternateColorCodes('&', lang.getMessage(key, placeholders));
         } else {
             return ChatColor.translateAlternateColorCodes('&', "&cNo lang files had been found!");
         }
     }
 
     public void sendMessage(CommandSender sender, String key, final Placeholder... placeholders) {
-        sender.sendMessage(getMessage(sender, key, placeholders));
+        if (sender != null) {
+            sender.sendMessage(getMessage(sender, key, placeholders));
+        }
     }
 }

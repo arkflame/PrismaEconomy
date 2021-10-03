@@ -1,8 +1,5 @@
-# Show extra information.
-debug: true
-
 # Default language used by the plugin.
-# This will change according to player's language.
+# Language changes according to player's language.
 lang: en
 
 # How the plugin will load/store data.

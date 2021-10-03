@@ -1,0 +1,27 @@
+error:
+  no_player: "&cYou haven't entered a player!"
+  no_amount: "&cYou haven't entered an amount!"
+  no_balance: "&cYou don't have enough balance!"
+  no_account: "&cThe player doesn't have an account!"
+  negative: "&cThe amount cannot be negative!"
+  console: "&cCan't run this command from the console!"
+commands:
+  balance: "&aYou have &6$%balance%⛃&a in your wallet!"
+  pay:
+    sender: "&aYou paid &6$%amount%⛃&a to &b%receiver%&a!"
+    receiver: "&aYou received &6$%amount%⛃&a from &b%sender%&a!"
+  economy:
+    give:
+      sender: "&aYou gave &6$%amount%⛃&a to &b%receiver%&a!"
+      receiver: "&b%sender%&a gave you &6$%amount%⛃&a!"
+    take:
+      sender: "&aYou took &6$%amount%⛃&a from &b%receiver%&a!"
+      receiver: "&b%sender%&a took &6$%amount%⛃&a from you!"
+    set:
+      sender: "&aYou set &b%receiver%&a wallet to &6$%amount%⛃&a!"
+      receiver: "&b%sender%&a setted your wallet to &6$%amount%⛃&a!"
+    help: |-
+      &aPrismaEconomy by 2LStudios&r
+      &r/%label% give &7<player> <amount>&r
+      &r/%label% take &7<player> <amount>&r
+      &r/%label% set &7<player> <amount>&r

@@ -1,4 +1,4 @@
-package dev._2lstudios.economy.utils;
+package dev._2lstudios.prismaeconomy.utils;
 
 import com.mongodb.ConnectionString;
 

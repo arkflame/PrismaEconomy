@@ -1,4 +1,4 @@
-package dev._2lstudios.economy.placeholders;
+package dev._2lstudios.prismaeconomy.placeholders;
 
 public class Placeholders {
     public static String replace(String string, final Placeholder ...placeholders) {

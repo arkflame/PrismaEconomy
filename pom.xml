@@ -1,28 +1,36 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <!-- Project information -->
     <groupId>dev._2lstudios</groupId>
-    <artifactId>Economy</artifactId>
+    <artifactId>PrismaEconomy</artifactId>
     <packaging>jar</packaging>
 
     <!-- Plugin Information -->
-    <name>Economy</name>
-    <description>Economy is a fast and simple economy system by 2LS</description>
+    <name>PrismaEconomy</name>
+    <description>PrismaEconomy is a fast and simple economy system by 2LS</description>
     <version>0.0.1</version>
-    <url>https://github.com/2lstudios-mc/Economy</url>
+    <url>https://github.com/2lstudios-mc/PrismaEconomy</url>
 
     <properties>
         <author>2LStudios</author>
-        <mainClass>dev._2lstudios.economy.Economy</mainClass>
+        <mainClass>dev._2lstudios.prismaeconomy.PrismaEconomy</mainClass>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-   <!-- External repositories -->
+    <!-- External repositories -->
     <repositories>
         <repository>
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>2lstudios-repo</id>
+            <url>https://ci.2lstudios.dev/plugin/repository/everything/</url>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 
@@ -35,9 +43,15 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongodb-driver-sync</artifactId>
-            <version>4.2.3</version>
+            <groupId>com.github.MilkBowl</groupId>
+            <artifactId>VaultAPI</artifactId>
+            <version>1.7</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.dotphin</groupId>
+            <artifactId>milkshakeorm</artifactId>
+            <version>0.1-ALPHA</version>
         </dependency>
     </dependencies>
 
@@ -75,7 +89,7 @@
             <!-- Compile with java 8 -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -85,7 +99,7 @@
             <!-- Include dependencies inside jar -->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.2.1</version>
+                <version>3.2.0</version>
                 <configuration>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -93,7 +107,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>make-assembly</id> 
+                        <id>make-assembly</id>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>

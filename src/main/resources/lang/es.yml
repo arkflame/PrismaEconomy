@@ -1,0 +1,27 @@
+error:
+  no_player: "&cNo ingresaste un jugador!"
+  no_amount: "&cNo ingresaste un monto!"
+  no_balance: "&cNo tienes suficiente dinero!"
+  no_account: "&cEl jugador no tiene cuenta!"
+  negative: "&cEl monto no puede ser negativo!"
+  console: "&cNo se puede usar ese comando desde la consola!"
+commands:
+  balance: "&aTienes &6$%balance%⛃&a en tu billetera!"
+  pay:
+    sender: "&aPagaste &6$%amount%⛃&a a &b%receiver%&a!"
+    receiver: "&aRecibiste &6$%amount%⛃&a de &b%sender%&a!"
+  economy:
+    give:
+      sender: "&aDiste &6$%amount%⛃&a a &b%receiver%&a!"
+      receiver: "&b%sender%&a te dio &6$%amount%⛃&a!"
+    take:
+      sender: "&aTomaste &6$%amount%⛃&a de &b%receiver%&a!"
+      receiver: "&b%sender%&a tomo &6$%amount%⛃&a de ti!"
+    set:
+      sender: "&aEstableciste la billetera de &b%receiver%&a a &6$%amount%⛃&a!"
+      receiver: "&b%sender%&a cambio tu billetera a &6$%amount%⛃&a!"
+    help: |-
+      &aPrismaEconomy by 2LStudios&r
+      &r/%label% give &7<jugador> <monto>&r
+      &r/%label% take &7<jugador> <monto>&r
+      &r/%label% set &7<jugador> <monto>&r
