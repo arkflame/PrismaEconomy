@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Player;

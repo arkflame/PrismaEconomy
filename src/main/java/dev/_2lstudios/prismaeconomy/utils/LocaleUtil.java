@@ -1,28 +1,20 @@
 package dev._2lstudios.prismaeconomy.utils;
 
+import java.lang.reflect.Field;
+
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Player.Spigot;
 
 public class LocaleUtil {
 	public static String getLocale(final Player player) {
-		String locale;
-
 		try {
-			locale = player.getClass().getMethod("getLocale").invoke(player, (Object[]) null).toString();
-		} catch (final Exception exception) {
-			try {
-				final Spigot spigot = player.spigot();
+			final Object handler = player.getClass().getMethod("getHandle").invoke(player);
+			final Field locale = handler.getClass().getField("locale");
 
-				locale = spigot.getClass().getMethod("getLocale").invoke(spigot, (Object[]) null).toString();
-			} catch (final Exception exception1) {
-				locale = "en_US";
-			}
-		}
+			locale.setAccessible(true);
 
-		if (locale == null) {
-			locale = "en_US";
-		}
+			return String.valueOf(locale.get(handler));
+		} catch (final Exception exception) { /* Ignored */ }
 
-		return locale;
+		return "en_US";
 	}
 }
