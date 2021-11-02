@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.UUID;
 
 import com.avaje.ebean.validation.NotNull;
-import com.dotphin.milkshakeorm.DatabaseType;
 import com.dotphin.milkshakeorm.MilkshakeORM;
+import com.dotphin.milkshakeorm.providers.Provider;
 import com.dotphin.milkshakeorm.repository.Repository;
 import com.dotphin.milkshakeorm.utils.MapFactory;
 import com.mongodb.lang.Nullable;
@@ -23,8 +23,8 @@ public class EconomyProvider implements Economy {
     private final Repository<Account> accountRepository;
 
     public EconomyProvider(final Plugin plugin, final MongoURIBuilder mongoURIBuilder) {
-        MilkshakeORM.connect(DatabaseType.MONGODB, mongoURIBuilder.toURI().getConnectionString());
-        MilkshakeORM.addRepository(Account.class);
+        final Provider provider = MilkshakeORM.connect(mongoURIBuilder.toURI().getConnectionString());
+        MilkshakeORM.addRepository(Account.class, provider);
         this.plugin = plugin;
         this.accountRepository = MilkshakeORM.getRepository(Account.class);
     }
