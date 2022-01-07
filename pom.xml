@@ -1,12 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Project information -->
     <groupId>dev._2lstudios</groupId>
     <artifactId>PrismaEconomy</artifactId>
     <packaging>jar</packaging>
 
-    <!-- Plugin Information -->
     <name>PrismaEconomy</name>
     <description>PrismaEconomy is a fast and simple economy system by 2LS</description>
     <version>0.0.1</version>
@@ -18,7 +16,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <!-- External repositories -->
     <repositories>
         <repository>
             <id>spigot-repo</id>
@@ -34,7 +31,6 @@
         </repository>
     </repositories>
 
-    <!-- Dependencies imports -->
     <dependencies>
         <dependency>
             <groupId>org.spigotmc</groupId>
@@ -49,21 +45,17 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.dotphin</groupId>
-            <artifactId>milkshake-orm</artifactId>
+            <groupId>dev._2lstudios</groupId>
+            <artifactId>Milkshake-Bukkit</artifactId>
             <version>0.1-BETA</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
-    <!-- Build settings -->
     <build>
-        <!-- Name of your compiled artifact -->
         <finalName>${artifactId}</finalName>
-        <!-- Directory of .java files -->
         <sourceDirectory>src/main/java</sourceDirectory>
-        <!-- Clean old builds and install dependencies before compile -->
         <defaultGoal>clean install</defaultGoal>
-        <!-- Package files inside resource directory in to the jar -->
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -74,9 +66,7 @@
             </resource>
         </resources>
 
-        <!-- Compilation settings starts here -->
         <plugins>
-            <!-- Compile with java 8 -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
@@ -84,26 +74,6 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
-            </plugin>
-
-            <!-- Include dependencies inside jar -->
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.3.0</version>
-                <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

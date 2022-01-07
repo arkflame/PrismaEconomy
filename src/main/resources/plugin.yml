@@ -4,7 +4,7 @@ author: ${author}
 main: ${mainClass}
 version: ${version}
 url: ${url}
-depend: [Vault, PlaceholderAPI]
+depend: [Vault, PlaceholderAPI, Milkshake-Bukkit]
 commands:
   balance:
     aliases: ["bal", "money"]
