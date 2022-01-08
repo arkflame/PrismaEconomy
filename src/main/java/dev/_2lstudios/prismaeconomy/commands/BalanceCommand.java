@@ -28,8 +28,14 @@ public class BalanceCommand implements CommandExecutor {
     public boolean onCommand(final CommandSender sender, final Command command, final String label,
             final String[] args) {
         server.getScheduler().runTaskAsynchronously(plugin, () -> {
-            if (sender instanceof OfflinePlayer) {
-                langManager.sendMessage(sender, "commands.balance",
+            if (args.length > 0) {
+                String playerName = args[0];
+
+                langManager.sendMessage(sender, "commands.balance.other",
+                        new Placeholder("%balance%", economy.getBalance(playerName)),
+                        new Placeholder("%other%", playerName));
+            } else if (sender instanceof OfflinePlayer) {
+                langManager.sendMessage(sender, "commands.balance.you",
                         new Placeholder("%balance%", economy.getBalance((OfflinePlayer) sender)));
             } else {
                 langManager.sendMessage(sender, "error.console");

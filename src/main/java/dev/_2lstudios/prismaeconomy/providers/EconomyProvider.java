@@ -24,7 +24,7 @@ public class EconomyProvider implements Economy {
 
     public EconomyProvider(final Plugin plugin, final MongoURIBuilder mongoURIBuilder) {
         final Provider provider = MilkshakeORM.connect(mongoURIBuilder.toURI().getConnectionString());
-        MilkshakeORM.addRepository(Account.class, provider);
+        MilkshakeORM.addRepository(Account.class, provider, "accounts");
         this.plugin = plugin;
         this.accountRepository = MilkshakeORM.getRepository(Account.class);
     }

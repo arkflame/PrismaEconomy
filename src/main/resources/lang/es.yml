@@ -5,8 +5,12 @@ error:
   no_account: "&cEl jugador no tiene cuenta!"
   negative: "&cEl monto no puede ser negativo!"
   console: "&cNo se puede usar ese comando desde la consola!"
+  console-only: "&cEste comando solo puede usarse desde la consola!"
+  permission: "&cNo tienes permiso para usar ese comando!"
 commands:
-  balance: "&aTienes &6$%balance%⛃&a en tu billetera!"
+  balance:
+    you: "&aTienes &6$%balance%⛃&a en tu billetera!"
+    other: "&b%other% &atiene &6$%amount%&a en su billetera!"
   pay:
     sender: "&aPagaste &6$%amount%⛃&a a &b%receiver%&a!"
     receiver: "&aRecibiste &6$%amount%⛃&a de &b%sender%&a!"

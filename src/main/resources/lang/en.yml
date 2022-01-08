@@ -5,8 +5,12 @@ error:
   no_account: "&cThe player doesn't have an account!"
   negative: "&cThe amount cannot be negative!"
   console: "&cCan't run this command from the console!"
+  console-only: "&cThis command can only be run from the console!"
+  permission: "&cNo permission to use this command!"
 commands:
-  balance: "&aYou have &6$%balance%⛃&a in your wallet!"
+  balance:
+    you: "&aYou have &6$%balance%⛃&a in your wallet!"
+    other: "&b%other% &ahas &6$%amount%&a in his wallet!"
   pay:
     sender: "&aYou paid &6$%amount%⛃&a to &b%receiver%&a!"
     receiver: "&aYou received &6$%amount%⛃&a from &b%sender%&a!"

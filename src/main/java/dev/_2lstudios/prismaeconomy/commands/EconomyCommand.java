@@ -4,6 +4,7 @@ import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -36,6 +37,16 @@ public class EconomyCommand implements CommandExecutor {
     @Override
     public boolean onCommand(final CommandSender sender, final Command command, final String label,
             final String[] args) {
+        if (!sender.hasPermission("economy.admin")) {
+            langManager.sendMessage(sender, "error.permission");
+            return true;
+        }
+
+        if (!(sender instanceof ConsoleCommandSender)) {
+            langManager.sendMessage(sender, "error.console-only");
+            return true;
+        }
+
         server.getScheduler().runTaskAsynchronously(plugin, () -> {
             if (args.length > 0) {
                 final String subcmd = args[0];
@@ -49,13 +60,13 @@ public class EconomyCommand implements CommandExecutor {
                         final double amount = toDouble(amountString);
 
                         if (subcmd.equals("give")) {
-                            if (amount >= 0) {
-                                economy.depositPlayer(targetPlayer, amount);
-                                langManager.sendMessage(sender, "commands.economy.give.receiver",
+                            if (amount > 0) {
+                                economy.depositPlayer(player, amount);
+                                langManager.sendMessage(sender, "commands.economy.give.sender",
                                         new Placeholder("%sender%", sender.getName()),
                                         new Placeholder("%receiver%", player.getName()),
                                         new Placeholder("%amount%", amount));
-                                langManager.sendMessage(player, "commands.economy.give.sender",
+                                langManager.sendMessage(player, "commands.economy.give.receiver",
                                         new Placeholder("%sender%", sender.getName()),
                                         new Placeholder("%receiver%", player.getName()),
                                         new Placeholder("%amount%", amount));
@@ -63,13 +74,13 @@ public class EconomyCommand implements CommandExecutor {
                                 langManager.sendMessage(sender, "error.negative");
                             }
                         } else if (subcmd.equals("take")) {
-                            if (amount >= 0) {
-                                economy.withdrawPlayer(targetPlayer, amount);
-                                langManager.sendMessage(sender, "commands.economy.take.receiver",
+                            if (amount > 0) {
+                                economy.withdrawPlayer(player, amount);
+                                langManager.sendMessage(sender, "commands.economy.take.sender",
                                         new Placeholder("%sender%", sender.getName()),
                                         new Placeholder("%receiver%", player.getName()),
                                         new Placeholder("%amount%", amount));
-                                langManager.sendMessage(player, "commands.economy.take.sender",
+                                langManager.sendMessage(player, "commands.economy.take.receiver",
                                         new Placeholder("%sender%", sender.getName()),
                                         new Placeholder("%receiver%", player.getName()),
                                         new Placeholder("%amount%", amount));
@@ -77,16 +88,20 @@ public class EconomyCommand implements CommandExecutor {
                                 langManager.sendMessage(sender, "error.negative");
                             }
                         } else if (subcmd.equals("set")) {
-                            economy.withdrawPlayer(targetPlayer, economy.getBalance(player));
-                            economy.depositPlayer(targetPlayer, amount);
-                            langManager.sendMessage(sender, "commands.economy.set.receiver",
-                                    new Placeholder("%sender%", sender.getName()),
-                                    new Placeholder("%receiver%", player.getName()),
-                                    new Placeholder("%amount%", amount));
-                            langManager.sendMessage(player, "commands.economy.set.sender",
-                                    new Placeholder("%sender%", sender.getName()),
-                                    new Placeholder("%receiver%", player.getName()),
-                                    new Placeholder("%amount%", amount));
+                            if (amount >= 0) {
+                                economy.withdrawPlayer(player, economy.getBalance(player));
+                                economy.depositPlayer(player, amount);
+                                langManager.sendMessage(sender, "commands.economy.set.sender",
+                                        new Placeholder("%sender%", sender.getName()),
+                                        new Placeholder("%receiver%", player.getName()),
+                                        new Placeholder("%amount%", amount));
+                                langManager.sendMessage(player, "commands.economy.set.receiver",
+                                        new Placeholder("%sender%", sender.getName()),
+                                        new Placeholder("%receiver%", player.getName()),
+                                        new Placeholder("%amount%", amount));
+                            } else {
+                                langManager.sendMessage(sender, "error.negative");
+                            }
                         }
                     } else {
                         langManager.sendMessage(sender, "error.no_amount");
