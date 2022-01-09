@@ -32,11 +32,11 @@ public class BalanceCommand implements CommandExecutor {
                 String playerName = args[0];
 
                 langManager.sendMessage(sender, "commands.balance.other",
-                        new Placeholder("%balance%", economy.getBalance(playerName)),
+                        new Placeholder("%amount%", economy.getBalance(playerName)),
                         new Placeholder("%other%", playerName));
             } else if (sender instanceof OfflinePlayer) {
                 langManager.sendMessage(sender, "commands.balance.you",
-                        new Placeholder("%balance%", economy.getBalance((OfflinePlayer) sender)));
+                        new Placeholder("%amount%", economy.getBalance((OfflinePlayer) sender)));
             } else {
                 langManager.sendMessage(sender, "error.console");
             }

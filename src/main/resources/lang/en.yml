@@ -9,7 +9,7 @@ error:
   permission: "&cNo permission to use this command!"
 commands:
   balance:
-    you: "&aYou have &6$%balance%⛃&a in your wallet!"
+    you: "&aYou have &6$%amount%⛃&a in your wallet!"
     other: "&b%other% &ahas &6$%amount%&a in his wallet!"
   pay:
     sender: "&aYou paid &6$%amount%⛃&a to &b%receiver%&a!"

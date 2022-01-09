@@ -9,7 +9,7 @@ error:
   permission: "&cNo tienes permiso para usar ese comando!"
 commands:
   balance:
-    you: "&aTienes &6$%balance%⛃&a en tu billetera!"
+    you: "&aTienes &6$%amount%⛃&a en tu billetera!"
     other: "&b%other% &atiene &6$%amount%&a en su billetera!"
   pay:
     sender: "&aPagaste &6$%amount%⛃&a a &b%receiver%&a!"
